@@ -1,0 +1,6 @@
+# For the crons:
+
+@reboot NETDEV=$(ip route show 0/0 | cut -f5 -d' ') && sudo ethtool -K $NETDEV rx-udp-gro-forwarding on rx-gro-list off
+0 0 * * * apt update && DEBIAN_FRONTEND='noninteractive' apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' --with-new-pkgs upgrade
+@reboot DEBIAN_FRONTEND='noninteractive' apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' autoremove
+0 20 * * 1,4,6 /sbin/shutdown -r now
